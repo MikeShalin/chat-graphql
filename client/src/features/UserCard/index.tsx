@@ -1,16 +1,11 @@
-// @ts-ignore
 import React from 'react'
 
-// @ts-ignore
 import { useQuery } from '@apollo/react-hooks'
 import { GET_USER_BY_ID } from './queries'
 
 import {
-  // @ts-ignore
   Card,
-  // @ts-ignore
   Icon,
-  // @ts-ignore
   Image,
 } from 'semantic-ui-react'
 
@@ -23,7 +18,7 @@ type TDataUser = {
   user_pic: string
   online: number
 }
-// @ts-ignore
+
 export const UserCard: React.FC = () => {
   const { data, loading, error } = useQuery(
     GET_USER_BY_ID,
