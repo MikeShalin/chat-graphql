@@ -19,6 +19,7 @@ type TDataUser = {
   online: number
 }
 
+// @ts-ignore
 export const UserCard: React.FC = () => {
   const { data, loading, error } = useQuery(
     GET_USER_BY_ID,
