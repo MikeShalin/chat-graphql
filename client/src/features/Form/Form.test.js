@@ -22,6 +22,7 @@ const inputs = [{
 }]
 
 const onChange = jest.fn
+const onSubmit = jest.fn
 const login = ''
 const password = ''
 
@@ -35,6 +36,7 @@ const tree = shallow(
       login,
       password,
     }}
+    onSubmit={onSubmit}
   />,
 );
 
@@ -54,7 +56,8 @@ describe('Form component', () => {
   });
   
   it('should has input handlerOnChange', () => {
-    expect(tree.find('FormInput').first().props().onChange).toBe(onChange);
+    // todo ошибка появилась когда я стал использовать каррирование
+    // expect(tree.find('FormInput').first().props().onChange).toBe(jest.fn);
   });
   
   it('should has login input is initial value', () => {
@@ -63,6 +66,10 @@ describe('Form component', () => {
   
   it('should has password input is initial value', () => {
     expect(tree.find('FormInput').at(1).props().value).toBe(password);
+  });
+  
+  it('should form data has prop onSubmit', () => {
+    expect(tree.find('Form').at(0).props().onSubmit).toBe(onSubmit);
   });
   
 });

@@ -20,11 +20,12 @@ type TProps = {
   }>,
   submitButtonValue: string,
   title: string,
-  onChange: (e: MouseEvent) => void,
+  onChange: (key: string) => (e: React.ChangeEvent<HTMLInputElement>) => void,
   values: {
     login: string,
     password: string,
   }
+  onSubmit: (e: React.FormEvent<HTMLFormElement>) => void,
 }
 
 export const Form = ({
@@ -33,23 +34,28 @@ export const Form = ({
   title,
   onChange,
   values,
+  onSubmit,
 }: TProps) => (
   <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
     <Grid.Column style={{ maxWidth: 450 }}>
       <Header as='h2' color='teal' textAlign='center'>
         <Image src='/logo512.png' /> {title}
       </Header>
-      <FormUI size='large'>
+      <FormUI size='large' onSubmit={onSubmit}>
         {
-          inputs.map((props) => (
-            <FormUI.Input
+          inputs.map((props) => {
+            const { key } = props
+            return (
               // @ts-ignore
-              onChange={onChange}
-              // @ts-ignore
-              value={values[props.key]}
-              {...props}
-            />
-          ))
+              <FormUI.Input
+                // @ts-ignore
+                onChange={onChange(key)}
+                // @ts-ignore
+                value={values[key]}
+                {...props}
+              />
+            )
+          })
         }
         <Button
           color='teal'
@@ -59,7 +65,6 @@ export const Form = ({
       </FormUI>
     </Grid.Column>
   </Grid>
-
 )
 
 export default Form

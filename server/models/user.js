@@ -7,6 +7,8 @@ const userSchema = new Schema({
   about: String,
   user_pic: String,
   online: Number,
+  login: String,
+  password: String,
 });
 
 module.exports = {

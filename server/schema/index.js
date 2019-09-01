@@ -6,6 +6,7 @@ const pubsub = new PubSub();
 
 const typeDefs = `
 type User {
+  id: ID
   login: String
   password: String
   nick: String
@@ -21,6 +22,7 @@ type Subscription {
 
 type Query {
   user(id: ID): User
+  userLogin(login: String, password: String): User
   users: [User]
 }
 
@@ -44,6 +46,7 @@ const resolvers = {
   },
   Query: {
     user: (_, { id }) => User.findById(id),
+    userLogin: (_, { login, password }) => User.findOne({ login, password }),
     users: () => User.find({}),
   },
   Mutation: {
