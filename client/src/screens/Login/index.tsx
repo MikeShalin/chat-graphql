@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { useQuery } from '@apollo/react-hooks'
+import { useApolloClient, useQuery } from '@apollo/react-hooks'
 
 import { Form } from '../../features/Form'
 import { useForm } from '../../hooks/useForm'
@@ -14,21 +14,27 @@ export const Login = ({}: TProps) => {
     login,
     password,
     handleChange,
+    error,
+    setError,
   } = useForm()
+  const client = useApolloClient()
+  const { data } = useQuery(GET_USER_BY_LOGIN_AND_PASSWORD,{
+    variables: { login, password }
+  })
 
-  const { data, loading, error } = useQuery(
-    GET_USER_BY_LOGIN_AND_PASSWORD,
-    { variables: { login, password } }
-  )
-
+  const { userLogin } = data
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    console.table({ login, password })
+
+    setError(!userLogin)
+
+    client.writeData({ // todo сделать фрагменты
+        data: {
+          isAuth: Boolean(userLogin),
+          profile: userLogin
+        },
+    })
   }
-
-  console.log({ data, loading, error })
-
-  if (data.length) return <h2>login!</h2>
   return (
     <Form
       inputs={inputs}
@@ -40,6 +46,7 @@ export const Login = ({}: TProps) => {
         password,
       }}
       onSubmit={onSubmit}
+      error={error}
     />
   )
 }

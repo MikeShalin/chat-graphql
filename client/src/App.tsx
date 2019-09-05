@@ -10,7 +10,7 @@ import { HttpLink } from 'apollo-link-http'
 import { WebSocketLink } from 'apollo-link-ws'
 import { getMainDefinition } from 'apollo-utilities'
 
-import { Login } from './Screens/Login'
+import { Switch } from './features/Switch'
 
 const httpLink = new HttpLink({
   uri: 'http://localhost:3005/graphql',
@@ -43,8 +43,15 @@ export const client = new ApolloClient({
   cache,
 })
 
+cache.writeData({
+  data: {
+    isAuth: false,
+    profile: null
+  },
+})
+
 export const App = () => (
   <ApolloProvider client={client}>
-    <Login />
+    <Switch/>
   </ApolloProvider>
 )

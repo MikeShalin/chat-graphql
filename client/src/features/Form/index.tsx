@@ -7,6 +7,7 @@ import {
   Grid,
   Header,
   Image,
+  Message,
 } from 'semantic-ui-react'
 
 type TProps = {
@@ -26,6 +27,7 @@ type TProps = {
     password: string,
   }
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void,
+  error?: boolean
 }
 
 export const Form = ({
@@ -35,13 +37,18 @@ export const Form = ({
   onChange,
   values,
   onSubmit,
+  error
 }: TProps) => (
   <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
     <Grid.Column style={{ maxWidth: 450 }}>
       <Header as='h2' color='teal' textAlign='center'>
         <Image src='/logo512.png' /> {title}
       </Header>
-      <FormUI size='large' onSubmit={onSubmit}>
+      <FormUI
+        size='large'
+        onSubmit={onSubmit}
+        error={error}
+      >
         {
           inputs.map((props) => {
             const { key } = props
@@ -56,6 +63,15 @@ export const Form = ({
               />
             )
           })
+        }
+        {
+          error && (
+            <Message
+              error={error}
+              header='Password or login is not correct'
+              content='You should check it'
+            />
+          )
         }
         <Button
           color='teal'

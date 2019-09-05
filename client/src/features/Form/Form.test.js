@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 
-import { Button } from 'semantic-ui-react';
+import { Button, Message } from 'semantic-ui-react';
 
 import Form from './index.tsx';
 
@@ -19,26 +19,33 @@ const inputs = [{
   iconPosition: 'left',
   placeholder: 'Password',
   type: 'password',
-}]
+}];
 
-const onChange = jest.fn
-const onSubmit = jest.fn
-const login = ''
-const password = ''
+const onChange = jest.fn;
+const onSubmit = jest.fn;
+const login = '';
+const password = '';
 
-const tree = shallow(
-  <Form
-    inputs={inputs}
-    submitButtonValue='login'
-    title='Log-in to your account'
-    onChange={onChange}
-    values={{
-      login,
-      password,
-    }}
-    onSubmit={onSubmit}
-  />,
-);
+const messageProps = {
+  error: true,
+  header: 'Password or login is not correct',
+  content: 'You should check it',
+};
+
+const formProps = {
+  inputs,
+  onChange,
+  onSubmit,
+  submitButtonValue: 'login',
+  title: 'Log-in to your account',
+  values: {
+    login,
+    password,
+  },
+};
+
+const tree = shallow(<Form error {...formProps} />);
+
 
 describe('Form component', () => {
   it('should has Button inside', () => {
@@ -70,6 +77,28 @@ describe('Form component', () => {
   
   it('should form data has prop onSubmit', () => {
     expect(tree.find('Form').at(0).props().onSubmit).toBe(onSubmit);
+  });
+  
+  it('should show error, if come in error props', () => {
+    expect(tree.find('Form').at(0).props().error).toBe(true);
+  });
+  
+  it('should has Message inside', () => {
+    console.log(tree.debug())
+    expect(tree.contains(<Message {...messageProps} />)).toBe(true);
+  });
+  
+  it('shouldn`t has Message inside if don`t come in error props ', () => {
+    const tree = shallow(
+      <Form {...formProps} />,
+    );
+    expect(tree.contains(<Message {...messageProps} />)).toBe(false);
+  });
+  
+  it('hidden error message, if input changed value', () => {
+    const wrapper = mount(<Form {...formProps} />); // todo описать этот кейс, сейчас он срабатывает из-за того что в форму не попадает error
+    wrapper.find('input').at(0).simulate('click', { target: { value: 'foo' }});
+    expect(wrapper.contains(<Message {...messageProps} />)).toBe(false);
   });
   
 });
