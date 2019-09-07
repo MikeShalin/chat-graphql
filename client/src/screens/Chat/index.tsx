@@ -1,34 +1,47 @@
 import React from 'react'
 
+import map from 'lodash/map'
 import { List } from 'semantic-ui-react'
-import { useQuery  } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/react-hooks'
 
 import { Message } from '../../features/Message'
 import { GET_MESSAGES_LIST } from './queries'
 
+type TMessage = {
+  id: string,
+  author: {
+    nick: string,
+    user_pic: string,
+    online: number,
+  }
+  message: string,
+  timestamp: number,
+} // todo чтобы не делать типизацию дважды, что можно сделать?
+
 export const Chat = () => {
-  const { data } = useQuery(GET_MESSAGES_LIST)
-  console.log(data)
+  const { data } = useQuery<{ messages: Array<TMessage> }>(GET_MESSAGES_LIST)
+  if (!data) return null
   return (
     <List relaxed>
-      <List.Item>
-        <Message
-          imgUrl='https://sun9-12.userapi.com/c855616/v855616888/d8e07/3FSBKuZOcZg.jpg'
-          nick='Pidr "Bones" Loh'
-          online={1}
-        >
-          Hello Jon!
-        </Message>
-      </List.Item>
-      <List.Item>
-        <Message
-          imgUrl='https://sun9-12.userapi.com/c855616/v855616888/d8e07/3FSBKuZOcZg.jpg'
-          nick='Jon "Bones" Jones'
-          online={1}
-        >
-          Hello Pidr!
-        </Message>
-      </List.Item>
+      {
+        map(
+          data.messages,
+          ({
+            author: {
+              user_pic,
+              ...author
+            },
+            message,
+            id,
+          }) => (
+            <List.Item key={id}>
+              <Message imgUrl={user_pic} {...author}>
+                {message}
+              </Message>
+            </List.Item>
+          ),
+        )
+      }
     </List>
   )
 }

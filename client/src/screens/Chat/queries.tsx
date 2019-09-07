@@ -4,7 +4,11 @@ export const GET_MESSAGES_LIST = gql`
   query {
     messages {
       id
-      authorId
+      author{
+        nick
+        user_pic
+        online
+      }
       message
       timestamp
     }
