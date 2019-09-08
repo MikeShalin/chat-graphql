@@ -2,13 +2,14 @@ import React from 'react'
 
 // import map from 'lodash/map'
 import {
-  Button,
   Form as FormUI,
   Grid,
   Header,
   Image,
   Message,
 } from 'semantic-ui-react'
+
+import { Button } from '../../features/Button'
 
 type TProps = {
   inputs: Array<{
@@ -73,11 +74,7 @@ export const Form = ({
             />
           )
         }
-        <Button
-          color='teal'
-          size='large'
-          fluid
-        >{submitButtonValue}</Button>
+        <Button>{submitButtonValue}</Button>
       </FormUI>
     </Grid.Column>
   </Grid>

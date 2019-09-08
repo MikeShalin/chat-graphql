@@ -2,9 +2,10 @@ import React from 'react';
 
 import { shallow, mount } from 'enzyme';
 
-import { Button, Message } from 'semantic-ui-react';
+import { Message } from 'semantic-ui-react';
 
 import Form from './index.tsx';
+import { Button } from '../Button';
 
 const inputs = [{
   key: 'login',
@@ -49,13 +50,7 @@ const tree = shallow(<Form error {...formProps} />);
 
 describe('Form component', () => {
   it('should has Button inside', () => {
-    const props = {
-      color: 'teal',
-      size: 'large',
-      fluid: true,
-      children: 'login',
-    }
-    expect(tree.contains(<Button {...props} />)).toBe(true);
+    expect(tree.contains(<Button>login</Button>)).toBe(true);
   });
   
   it('should has FormUI inside', () => {

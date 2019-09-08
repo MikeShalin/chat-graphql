@@ -83,4 +83,9 @@ it('should has Feed inside', () => {
       </FeedUser>
     )).toBe(true);
   });
+  
+  it('should Segment has raised props', () => {
+    expect(tree.find('Segment').at(0).props().raised).toBe(true);
+  });
+  
 });

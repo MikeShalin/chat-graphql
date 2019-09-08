@@ -20,7 +20,7 @@ type TData = {
 export const Switch = () => {
   const { data } = useQuery<TData, string>(query)
   return (
-    get(data, 'isAuth')
+    get(data, 'isAuth') || true
       ? <Chat />
       : <Login />
   )
