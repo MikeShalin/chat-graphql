@@ -21,6 +21,7 @@ module.exports = {
     '^features(.*)$': '<rootDir>/src/features$1',
     '^hooks(.*)$': '<rootDir>/src/hooks$1',
     '^screens(.*)$': '<rootDir>/src/screens$1',
+    '^queries(.*)$': '<rootDir>/src/queries$1',
   },
   setupFiles: [
     '<rootDir>/config/testSetup.js',

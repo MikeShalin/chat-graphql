@@ -10,7 +10,8 @@ type Message {
   id: ID
   author: User
   message: String
-  timestamp: Int
+  createdAt: String
+  updatedAt: String
 }
 
 type User {
@@ -88,11 +89,11 @@ const resolvers = {
   
     addMessage: (_, { authorId, message }) => {
       pubsub.publish(ADDED_MESSAGE, { authorId, message })
-      return User.findByIdAndUpdate(
-        id,
-        { $set: { online: 0 } },
-        { new: true },
-      );
+      const userMessage = new Message({
+        message,
+        author: authorId,
+      });
+      return userMessage.save();
     },
   },
 };

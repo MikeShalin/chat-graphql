@@ -7,9 +7,7 @@ import { useForm } from 'hooks/useForm'
 import { inputs } from './config'
 import { GET_USER_BY_LOGIN_AND_PASSWORD } from './queries'
 
-type TProps = {}
-
-export const Login = ({}: TProps) => {
+export const Login = () => {
   const {
     login,
     password,

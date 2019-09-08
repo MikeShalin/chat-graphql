@@ -23,7 +23,8 @@
       "features/*": ["features/*"],
       "Root/*": ["./*"],
       "hooks/*": ["hooks/*"],
-      "screens/*": ["screens/*"]
+      "screens/*": ["screens/*"],
+      "queries/*": ["queries/*"]
     }
   },
   "include": [

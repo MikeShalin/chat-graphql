@@ -10,7 +10,7 @@ export const GET_MESSAGES_LIST = gql`
         online
       }
       message
-      timestamp
+      createdAt
     }
   }
 `
