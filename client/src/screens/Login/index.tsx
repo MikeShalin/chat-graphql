@@ -2,8 +2,8 @@ import React from 'react'
 
 import { useApolloClient, useQuery } from '@apollo/react-hooks'
 
-import { Form } from '../../features/Form'
-import { useForm } from '../../hooks/useForm'
+import { Form } from 'features/Form'
+import { useForm } from 'hooks/useForm'
 import { inputs } from './config'
 import { GET_USER_BY_LOGIN_AND_PASSWORD } from './queries'
 

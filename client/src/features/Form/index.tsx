@@ -9,7 +9,7 @@ import {
   Message,
 } from 'semantic-ui-react'
 
-import { Button } from '../../features/Button'
+import { Button } from 'features/Button'
 
 type TProps = {
   inputs: Array<{

@@ -1,12 +1,8 @@
 import React from 'react'
 
-import {
-  Form,
-  TextArea,
-  // Button,
-} from 'semantic-ui-react'
+import { Form, TextArea } from 'semantic-ui-react'
 
-import { Button } from '../Button';
+import { Button } from 'features/Button'
 
 export const ChatArea = () => (
   <Form>

@@ -18,6 +18,9 @@ module.exports = {
   testURL: 'http://localhost',
   moduleNameMapper: {
     '^Root(.*)$': '<rootDir>/src$1',
+    '^features(.*)$': '<rootDir>/src/features$1',
+    '^hooks(.*)$': '<rootDir>/src/hooks$1',
+    '^screens(.*)$': '<rootDir>/src/screens$1',
   },
   setupFiles: [
     '<rootDir>/config/testSetup.js',

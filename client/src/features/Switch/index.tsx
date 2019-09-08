@@ -4,8 +4,8 @@ import get from 'lodash/get'
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-import { Login } from '../../screens/Login'
-import { Chat } from '../../screens/Chat'
+import { Login } from 'screens/Login'
+import { Chat } from 'screens/Chat'
 
 const query = gql`
 {

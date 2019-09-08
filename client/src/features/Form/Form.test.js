@@ -5,7 +5,7 @@ import { shallow, mount } from 'enzyme';
 import { Message } from 'semantic-ui-react';
 
 import Form from './index.tsx';
-import { Button } from '../Button';
+import { Button } from 'features/Button';
 
 const inputs = [{
   key: 'login',

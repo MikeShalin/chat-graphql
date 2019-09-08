@@ -4,9 +4,9 @@ import map from 'lodash/map'
 import { List, Container } from 'semantic-ui-react'
 import { useQuery } from '@apollo/react-hooks'
 
-import { Message } from '../../features/Message'
-import { Header } from '../../features/Header'
-import { ChatArea } from '../../features/ChatArea'
+import { Message } from 'features/Message'
+import { Header } from 'features/Header'
+import { ChatArea } from 'features/ChatArea'
 import { GET_MESSAGES_LIST } from './queries'
 
 type TMessage = {
