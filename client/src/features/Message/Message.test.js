@@ -14,6 +14,7 @@ describe('Form component', () => {
     nick: 'Jon "Bones" Jones',
     imgUrl: 'https://sun9-12.userapi.com/c855616/v855616888/d8e07/3FSBKuZOcZg.jpg',
     online: 1,
+    createdAt: '1567927583899',
   };
   
   const tree = shallow(<Message {...props}>{textInside}</Message>);
@@ -23,18 +24,24 @@ describe('Form component', () => {
   const FeedSummary = Feed.Summary
   const FeedDate = Feed.Date
   const FeedUser = Feed.User
+  const FeedMeta = Feed.Meta
   
-it('should has Feed inside', () => {
+  it('should has Feed inside', () => {
     expect(tree.contains(
       <Feed>
         <FeedEvent>
           <FeedLabel image={props.imgUrl} />
           <FeedContent>
-            <FeedUser>{props.nick}</FeedUser>
+            <FeedSummary>
+              <FeedUser>{props.nick}</FeedUser>
+              <FeedDate content={props.createdAt} />
+            </FeedSummary>
             <FeedSummary>
               {textInside}
             </FeedSummary>
-            <FeedDate content={config[props.online]}/>
+            <FeedMeta>
+              <FeedDate content={config[props.online]} />
+            </FeedMeta>
           </FeedContent>
         </FeedEvent>
       </Feed>,
@@ -46,11 +53,16 @@ it('should has Feed inside', () => {
       <FeedEvent>
         <FeedLabel image={props.imgUrl} />
         <FeedContent>
-          <FeedUser>{props.nick}</FeedUser>
+          <FeedSummary>
+            <FeedUser>{props.nick}</FeedUser>
+            <Feed.Date content={props.createdAt} />
+          </FeedSummary>
           <FeedSummary>
             {textInside}
           </FeedSummary>
-          <FeedDate content={config[props.online]}/>
+          <FeedMeta>
+            <FeedDate content={config[props.online]} />
+          </FeedMeta>
         </FeedContent>
       </FeedEvent>,
     )).toBe(true);
@@ -64,7 +76,7 @@ it('should has Feed inside', () => {
     expect(tree.contains(
       <FeedSummary>
         {textInside}
-      </FeedSummary>
+      </FeedSummary>,
     )).toBe(true);
   });
   
@@ -73,14 +85,18 @@ it('should has Feed inside', () => {
   });
   
   it('should Feed.Date has image props', () => {
-    expect(tree.find('FeedDate').at(0).props().content).toBe(config[props.online]);
+    expect(tree.find('FeedDate').at(1).props().content).toBe(config[props.online]);
+  });
+  
+  it('should Feed.Date has image props', () => {
+    expect(tree.find('FeedDate').at(0).props().content).toBe(props.createdAt);
   });
   
   it('should has Feed.Summary inside', () => {
     expect(tree.contains(
       <FeedUser>
         {props.nick}
-      </FeedUser>
+      </FeedUser>,
     )).toBe(true);
   });
   

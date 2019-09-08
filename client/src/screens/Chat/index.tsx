@@ -7,6 +7,7 @@ import {
   Message as MessageUI,
 } from 'semantic-ui-react'
 import { useQuery } from '@apollo/react-hooks'
+import m from 'moment'
 
 import { Message } from 'features/Message'
 import { Header } from 'features/Header'
@@ -42,9 +43,8 @@ export const Chat = () => {
   )
   if (loading) return <Loader />
   return (
-    <Container >
+    <Container>
       <Header />
-      <ChatArea />
       <List relaxed>
         {
           map(
@@ -56,16 +56,23 @@ export const Chat = () => {
               },
               message,
               id,
-            }) => (
-              <List.Item key={id}>
-                <Message imgUrl={user_pic} {...author}>
+              createdAt,
+            }) => {
+              const timeAgo = m(+createdAt).fromNow()
+              return <List.Item key={id}>
+                <Message
+                  imgUrl={user_pic}
+                  createdAt={timeAgo}
+                  {...author}
+                >
                   {message}
                 </Message>
               </List.Item>
-            ),
+            },
           )
         }
       </List>
+      <ChatArea />
     </Container>
   )
 }

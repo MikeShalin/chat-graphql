@@ -66,7 +66,7 @@ const resolvers = {
     userLogin: (_, { login, password }) => User.findOne({ login, password }),
     users: () => User.find({}),
     message: (_, { id }) => Message.findById(id),
-    messages: () => Message.find({}).populate('author')
+    messages: () => Message.find({}).populate('author').limit(5)
   },
   Mutation: {
     saveUserProfile: (_, args) => {

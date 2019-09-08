@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState } from 'react'
 
 import { useMutation } from '@apollo/react-hooks'
 import { Form, Message as MessageUI, TextArea } from 'semantic-ui-react'

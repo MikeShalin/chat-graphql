@@ -10,7 +10,7 @@ import { HttpLink } from 'apollo-link-http'
 import { WebSocketLink } from 'apollo-link-ws'
 import { getMainDefinition } from 'apollo-utilities'
 
-import { Switch } from './features/Switch'
+import { Switch } from 'features/Switch'
 
 const httpLink = new HttpLink({
   uri: 'http://localhost:3005/graphql',
