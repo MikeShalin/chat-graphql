@@ -26,12 +26,16 @@ export const Login = () => {
 
     setError(!userLogin)
 
-    client.writeData({ // todo сделать фрагменты
+    if (userLogin) {
+      localStorage.isAuth = Boolean(userLogin)
+      localStorage.profile = JSON.stringify(userLogin)
+      client.writeData({ // todo сделать фрагменты
         data: {
           isAuth: Boolean(userLogin),
           profile: userLogin
         },
-    })
+      })
+    }
   }
   return (
     <Form

@@ -92,7 +92,7 @@ describe('Form component', () => {
   
   it('hidden error message, if input changed value', () => {
     const wrapper = mount(<Form {...formProps} />); // todo описать этот кейс, сейчас он срабатывает из-за того что в форму не попадает error
-    wrapper.find('input').at(0).simulate('click', { target: { value: 'foo' }});
+    wrapper.find('input').at(0).simulate('click', { target: { value: 'foo' } });
     expect(wrapper.contains(<Message {...messageProps} />)).toBe(false);
   });
   

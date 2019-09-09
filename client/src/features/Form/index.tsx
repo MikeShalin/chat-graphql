@@ -1,6 +1,5 @@
 import React from 'react'
 
-// import map from 'lodash/map'
 import {
   Form as FormUI,
   Grid,
@@ -38,12 +37,13 @@ export const Form = ({
   onChange,
   values,
   onSubmit,
-  error
+  error,
 }: TProps) => (
   <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
     <Grid.Column style={{ maxWidth: 450 }}>
       <Header as='h2' color='teal' textAlign='center'>
-        <Image src='/logo512.png' /> {title}
+        <Image src='/logo512.png' />
+        {title}
       </Header>
       <FormUI
         size='large'

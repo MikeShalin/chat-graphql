@@ -13,6 +13,7 @@ import { Message } from 'features/Message'
 import { Header } from 'features/Header'
 import { ChatArea } from 'features/ChatArea'
 import { Loader } from 'features/Loader'
+import { ButtonLogout } from 'features/ButtonLogout'
 
 import { GET_MESSAGES_LIST } from 'queries'
 
@@ -45,6 +46,7 @@ export const Chat = () => {
   return (
     <Container>
       <Header />
+      <ButtonLogout />
       <List relaxed>
         {
           map(

@@ -1,4 +1,7 @@
 import React from 'react'
+import { BrowserRouter as Router } from 'react-router-dom'
+
+import get from 'lodash/get'
 
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { ApolloProvider } from '@apollo/react-hooks'
@@ -45,13 +48,15 @@ export const client = new ApolloClient({
 
 cache.writeData({
   data: {
-    isAuth: false,
-    profile: null
+    isAuth: get(localStorage, 'isAuth', false),
+    profile: JSON.parse(get(localStorage, 'profile', 'null')),
   },
 })
 
 export const App = () => (
   <ApolloProvider client={client}>
-    <Switch/>
+    <Router>
+      <Switch />
+    </Router>
   </ApolloProvider>
 )
