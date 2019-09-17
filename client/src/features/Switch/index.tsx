@@ -8,7 +8,7 @@ import gql from 'graphql-tag'
 
 import { Login } from 'screens/Login'
 import { Chat } from 'screens/Chat'
-import { Profile } from 'screens/Profile'
+import { Registration } from 'screens/Registration'
 
 const query = gql`
 {
@@ -25,15 +25,15 @@ export const Switch = () => {
 
   const render = (Screen: React.FC) => () => (
     get(data, 'isAuth')
-      ? <Screen />
-      : <Login />
+      ? <Chat />
+      : <Screen />
   )
 
   return (
     <RouterSwitch>
-      <Route path='/' exact render={render(Profile)} />
-      <Route path='/login' component={Login} />
-      <Route path='/chat' component={render(Chat)} />
+      <Route path='/login' component={render(Login)} />
+      <Route path='/registration' component={render(Registration)} />
+      <Route path='/' component={render(Login)} />
       <Redirect from='*' to='/chat' />
     </RouterSwitch>
   )

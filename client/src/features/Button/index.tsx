@@ -5,6 +5,7 @@ import { Button as ButtonUI } from 'semantic-ui-react'
 type TProps = {
   children: string,
   onClick?: () => void,
+  disabled?: boolean,
 }
 
 export const Button = ({ children, ...props }: TProps) => (

@@ -21,7 +21,6 @@ type TMessage = {
   id: string,
   author: {
     nick: string,
-    user_pic: string,
     online: number,
   }
   message: string,
@@ -52,10 +51,7 @@ export const Chat = () => {
           map(
             data.messages,
             ({
-              author: {
-                user_pic,
-                ...author
-              },
+              author,
               message,
               id,
               createdAt,
@@ -63,7 +59,6 @@ export const Chat = () => {
               const timeAgo = m(+createdAt).fromNow()
               return <List.Item key={id}>
                 <Message
-                  imgUrl={user_pic}
                   createdAt={timeAgo}
                   {...author}
                 >

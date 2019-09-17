@@ -5,7 +5,6 @@ import { Feed, Segment } from 'semantic-ui-react'
 type TProps = {
   nick: string,
   children: string,
-  imgUrl: string,
   online: number,
   createdAt: string,
 }
@@ -13,7 +12,6 @@ type TProps = {
 const config = ['offline', 'online']
 
 export const Message = ({
-  imgUrl,
   children,
   nick,
   online,
@@ -22,7 +20,6 @@ export const Message = ({
   <Segment raised>
     <Feed>
       <Feed.Event>
-        <Feed.Label image={imgUrl} />
         <Feed.Content>
           <Feed.Summary>
             <Feed.User>

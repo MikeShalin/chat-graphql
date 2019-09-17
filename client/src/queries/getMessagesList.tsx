@@ -6,7 +6,6 @@ export const GET_MESSAGES_LIST = gql`
       id
       author{
         nick
-        user_pic
         online
       }
       message

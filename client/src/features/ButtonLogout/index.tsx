@@ -8,8 +8,8 @@ export const ButtonLogout = () => {
   const client = useApolloClient()
 
   const handleLogout = () => {
-    localStorage.removeItem('isAuth') // todo нет тестов для этого
-    localStorage.removeItem('profile') // todo нет тестов для этого
+    // localStorage.removeItem('isAuth') // todo нет тестов для этого
+    // localStorage.removeItem('profile') // todo нет тестов для этого
     client.writeData({
       data: {
         isAuth: false,

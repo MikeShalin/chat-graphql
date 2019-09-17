@@ -19,8 +19,6 @@ type User {
   login: String
   password: String
   nick: String
-  about: String
-  user_pic: String
   online: Int
 }
 
@@ -33,13 +31,14 @@ type Subscription {
 type Query {
   user(id: ID): User
   userLogin(login: String, password: String): User
+  getUser(login: String): User
   users: [User]
   message(id: ID): Message
   messages: [Message]
 }
 
 type Mutation {
-  saveUserProfile(login: String, nick: String, about: String, user_pic: String): User
+  saveUserProfile(login: String, nick: String, password: String): User
   exitUserFromChat(id: ID, nick: String): User
   addMessage(authorId: String, message: String): Message
 }
@@ -64,6 +63,7 @@ const resolvers = {
   Query: {
     user: (_, { id }) => User.findById(id),
     userLogin: (_, { login, password }) => User.findOne({ login, password }),
+    getUser: (_, { login }) => User.findOne({ login }),
     users: () => User.find({}),
     message: (_, { id }) => Message.findById(id),
     messages: () => Message.find({}).populate('author').limit(5)

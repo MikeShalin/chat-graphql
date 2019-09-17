@@ -48,8 +48,10 @@ export const client = new ApolloClient({
 
 cache.writeData({
   data: {
-    isAuth: get(localStorage, 'isAuth', false),
-    profile: JSON.parse(get(localStorage, 'profile', 'null')),
+    isAuth: false,
+    // isAuth: get(localStorage, 'isAuth', false),
+    profile: null,
+    // profile: JSON.parse(get(localStorage, 'profile', 'null')),
   },
 })
 

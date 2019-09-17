@@ -12,7 +12,6 @@ describe('Form component', () => {
   const textInside = 'Hello world!';
   const props = {
     nick: 'Jon "Bones" Jones',
-    imgUrl: 'https://sun9-12.userapi.com/c855616/v855616888/d8e07/3FSBKuZOcZg.jpg',
     online: 1,
     createdAt: '1567927583899',
   };
@@ -30,7 +29,6 @@ describe('Form component', () => {
     expect(tree.contains(
       <Feed>
         <FeedEvent>
-          <FeedLabel image={props.imgUrl} />
           <FeedContent>
             <FeedSummary>
               <FeedUser>{props.nick}</FeedUser>
@@ -51,7 +49,6 @@ describe('Form component', () => {
   it('should has Feed.Event inside', () => {
     expect(tree.contains(
       <FeedEvent>
-        <FeedLabel image={props.imgUrl} />
         <FeedContent>
           <FeedSummary>
             <FeedUser>{props.nick}</FeedUser>
@@ -68,20 +65,12 @@ describe('Form component', () => {
     )).toBe(true);
   });
   
-  it('should has Feed.Label inside', () => {
-    expect(tree.contains(<FeedLabel image={props.imgUrl} />)).toBe(true);
-  });
-  
   it('should has Feed.Summary inside', () => {
     expect(tree.contains(
       <FeedSummary>
         {textInside}
       </FeedSummary>,
     )).toBe(true);
-  });
-  
-  it('should Feed.Label has image props', () => {
-    expect(tree.find('FeedLabel').at(0).props().image).toBe(props.imgUrl);
   });
   
   it('should Feed.Date has image props', () => {

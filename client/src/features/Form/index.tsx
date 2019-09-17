@@ -2,7 +2,6 @@ import React from 'react'
 
 import {
   Form as FormUI,
-  Grid,
   Header,
   Image,
   Message,
@@ -23,11 +22,13 @@ type TProps = {
   title: string,
   onChange: (key: string) => (e: React.ChangeEvent<HTMLInputElement>) => void,
   values: {
-    login: string,
-    password: string,
+    login?: string,
+    password?: string,
+    nick?: string,
   }
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void,
   error?: boolean
+  submitButtonDisable?: boolean
 }
 
 export const Form = ({
@@ -38,46 +39,45 @@ export const Form = ({
   values,
   onSubmit,
   error,
+  submitButtonDisable,
 }: TProps) => (
-  <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
-    <Grid.Column style={{ maxWidth: 450 }}>
-      <Header as='h2' color='teal' textAlign='center'>
-        <Image src='/logo512.png' />
-        {title}
-      </Header>
-      <FormUI
-        size='large'
-        onSubmit={onSubmit}
-        error={error}
-      >
-        {
-          inputs.map((props) => {
-            const { key } = props
-            return (
+  <>
+    <Header as='h2' color='teal' textAlign='center'>
+      <Image src='/logo512.png' />
+      {title}
+    </Header>
+    <FormUI
+      size='large'
+      onSubmit={onSubmit}
+      error={error}
+    >
+      {
+        inputs.map((props) => {
+          const { key } = props
+          return (
+            // @ts-ignore
+            <FormUI.Input
               // @ts-ignore
-              <FormUI.Input
-                // @ts-ignore
-                onChange={onChange(key)}
-                // @ts-ignore
-                value={values[key]}
-                {...props}
-              />
-            )
-          })
-        }
-        {
-          error && (
-            <Message
-              error={error}
-              header='Password or login is not correct'
-              content='You should check it'
+              onChange={onChange(key)}
+              // @ts-ignore
+              value={values[key]}
+              {...props}
             />
           )
-        }
-        <Button>{submitButtonValue}</Button>
-      </FormUI>
-    </Grid.Column>
-  </Grid>
+        })
+      }
+      {
+        error && (
+          <Message
+            error={error}
+            header='Password or login is not correct' //todo текст сообщений
+            content='You should check it'
+          />
+        )
+      }
+      <Button disabled={submitButtonDisable}>{submitButtonValue}</Button>
+    </FormUI>
+  </>
 )
 
 export default Form

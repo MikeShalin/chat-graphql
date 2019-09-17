@@ -7,8 +7,6 @@ export const GET_USER_BY_LOGIN_AND_PASSWORD = gql`
       login
       password
       nick
-      about
-      user_pic
       online
     }
   }
