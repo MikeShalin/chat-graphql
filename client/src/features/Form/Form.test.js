@@ -80,7 +80,6 @@ describe('Form component', () => {
   });
   
   it('should has Message inside', () => {
-    console.log(tree.debug())
     expect(tree.contains(<Message {...messageProps} />)).toBe(true);
   });
   
